@@ -26,4 +26,4 @@ usethis::use_vignette("my-vignette")
 
 library(usethis)
 create_package("path/to/MyLinearModels")
-
+library(simulatorR)
