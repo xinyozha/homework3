@@ -18,4 +18,12 @@ hello <- function() {
 }
 install.packages("devtools")
 install.packages("roxygen2")
+library(roxygen2)
+library(devtools)
+devtools::document()
+usethis::use_rcpp()
+usethis::use_vignette("my-vignette")
+
+library(usethis)
+create_package("path/to/MyLinearModels")
 
