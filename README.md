@@ -23,7 +23,7 @@ devtools::install_github("xinyozha/homework3")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-#library(homework3)
+# library(homework3)
 ## basic example code
 ```
 
