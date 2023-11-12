@@ -4,6 +4,10 @@
 # homework3
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/xinyozha/homework3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/xinyozha/homework3/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/xinyozha/homework3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/xinyozha/homework3?branch=main)
 <!-- badges: end -->
 
 The goal of homework3 is to …
