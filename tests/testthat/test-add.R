@@ -1,3 +1,3 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+test_that("add() function return the sum of two number", {
+  expect_equal(add(1, 2), 3)
 })
