@@ -28,14 +28,14 @@ my_lm <- function(formula, data) {
   Y <- model.response(model.frame(terms, data))
   # Calculate the estimates for beta
   beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y
-  my_coefficients = t(beta_hat)
+  my_coefficients <- t(beta_hat)
   fitted_values <- X %*% beta_hat
-  my_residuals = Y - fitted_values
+  my_residuals <- Y - fitted_values
   rss <- sum(my_residuals^2)
   tss <- sum((Y - mean(Y))^2)
-  rsquared <- 1 - rss/tss
-  return(list(coefficients=my_coefficients, fitted.values=fitted_values,
-              residuals=my_residuals, rsquared = rsquared))
+  rsquared <- 1 - rss / tss
+  return(list(coefficients = my_coefficients, fitted.values = fitted_values,
+              residuals = my_residuals, rsquared = rsquared))
 }
 #' Calculate the AIC manually
 #'
@@ -66,16 +66,16 @@ calculate_aic <- function(formula, data) {
     Y <- model.response(model.frame(terms, data))
     # Calculate the estimates for beta
     beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y
-    my_coefficients = t(beta_hat)
+    my_coefficients <- t(beta_hat)
     fitted_values <- X %*% beta_hat
-    my_residuals = Y - fitted_values
+    my_residuals <- Y - fitted_values
     rss <- sum(my_residuals^2)
     tss <- sum((Y - mean(Y))^2)
-    rsquared <- 1 - rss/tss
-    return(list(coefficients=my_coefficients, fitted.values=fitted_values,
-                residuals=my_residuals, rsquared = rsquared))
+    rsquared <- 1 - rss / tss
+    return(list(coefficients = my_coefficients, fitted.values = fitted_values,
+                residuals = my_residuals, rsquared = rsquared))
   }
-  lm_model = my_lm(formula, data)
+  lm_model <- my_lm(formula, data)
   n <- length(lm_model$residuals)
   p <- length(lm_model$coefficients)
   rss <- sum((lm_model$residuals)^2)

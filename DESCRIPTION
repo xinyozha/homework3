@@ -1,10 +1,10 @@
 Package: homework3
 Type: Package
-Title: Add
+Title: lm_AIC
 Version: 0.2.0
 Author: Xinyu
 Maintainer: The package maintainer <yourself@somewhere.net>
-Description: Show an example of how to create a r package in a professional way.
+Description: The function of linear regression and AIC.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
