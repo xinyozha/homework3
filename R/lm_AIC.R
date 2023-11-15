@@ -1,8 +1,3 @@
-# Calculate the AIC manually
-# n is the number of observations
-# rss is the residual sum of squares
-# k is the number of parameters (including the intercept)
-
 #' Multiply Linear Regression
 #'
 #' @param formula
@@ -54,9 +49,6 @@ my_lm <- function(formula, data) {
 #' @examples
 #' data = mtcars
 #' formula = mpg ~ disp + hp
-#' n is the number of observations
-#' rss is the residual sum of squares
-#' k is the number of parameters (including the intercept)
 #' calculate_aic(formula, data)
 
 calculate_aic <- function(formula, data) {

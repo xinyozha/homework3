@@ -24,8 +24,5 @@ Calculate the AIC manually
 \examples{
 data = mtcars
 formula = mpg ~ disp + hp
-n is the number of observations
-rss is the residual sum of squares
-k is the number of parameters (including the intercept)
 calculate_aic(formula, data)
 }
