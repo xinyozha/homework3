@@ -1,7 +1,7 @@
 #' Multiply Linear Regression
 #'
-#' @param formula
-#' @param data
+#' @param formula 11
+#' @param data 1111
 #'
 #' @return List containing the following elements
 #' \itemize{
@@ -34,8 +34,8 @@ my_lm <- function(formula, data) {
 }
 #' Calculate the AIC manually
 #'
-#' @param formula
-#' @param data
+#' @param formula 111
+#' @param data 11111
 #'
 #' @return List containing the following elements
 #' \itemize{

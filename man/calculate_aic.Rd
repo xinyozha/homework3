@@ -7,7 +7,9 @@
 calculate_aic(formula, data)
 }
 \arguments{
-\item{data}{}
+\item{formula}{111}
+
+\item{data}{11111}
 }
 \value{
 List containing the following elements

@@ -7,7 +7,9 @@
 my_lm(formula, data)
 }
 \arguments{
-\item{data}{}
+\item{formula}{11}
+
+\item{data}{1111}
 }
 \value{
 List containing the following elements
