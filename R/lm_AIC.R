@@ -32,9 +32,10 @@ my_lm <- function(formula, data) {
   return(list(coefficients = my_coefficients, fitted.values = fitted_values,
               residuals = my_residuals, rsquared = rsquared))
 }
+
 #' Calculate the AIC manually
 #'
-#' @param formula 111
+#' @param formula linear formula (simple/multiply)
 #' @param data 11111
 #'
 #' @return List containing the following elements
