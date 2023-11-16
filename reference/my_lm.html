@@ -57,11 +57,11 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>formula</dt>
-<dd><p>11</p></dd>
+<dd><p>input formula such as y ~ x1 + x2</p></dd>
 
 
 <dt>data</dt>
-<dd><p>1111</p></dd>
+<dd><p>input data such as mtcars</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -71,7 +71,15 @@
 <p>List containing the following elements</p><ul><li><p>beta estimates(coefficients)</p></li>
 <li><p>fitted_values</p></li>
 <li><p>residuals</p></li>
+<li><p>mse</p></li>
 <li><p>rsquared</p></li>
+<li><p>adj_rsquared</p></li>
+<li><p>SE</p></li>
+<li><p>t</p></li>
+<li><p>p.value</p></li>
+<li><p>F_stat</p></li>
+<li><p>df1</p></li>
+<li><p>df2</p></li>
 </ul></div>
 
     <div class="section level2">
@@ -153,8 +161,33 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maserati Bora        1.7197522</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Volvo 142E          -2.9564359</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $mse</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 9.775636</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rsquared</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7482402</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $adj_rsquared</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7308774</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $SE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Intercept)        disp          hp </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1.331566129 0.007404856 0.013385499 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $t</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 23.082522 -4.098159 -1.855746</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $p.value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.0000000000 0.0003062678 0.0736790529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $F_stat</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 43.09458</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $df1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $df2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 29</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
