@@ -37,7 +37,7 @@ regression) in Vignettes folder or use the following code:
 
 ``` r
 browseVignettes("homework3")
-#> No vignettes found by browseVignettes("homework3")
+#> starting httpd help server ... done
 ```
 
 ## Help
@@ -47,6 +47,5 @@ regression function:
 
 ``` r
 ?my_lm
-#> starting httpd help server ... done
 ?my_confint
 ```
