@@ -74,37 +74,232 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">homework3</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bench.r-lib.org/" class="external-link">bench</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bench.r-lib.org/" class="external-link">bench</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="basic-command">Basic command<a class="anchor" aria-label="anchor" href="#basic-command"></a>
+</h3>
+<p>To fit the linear regression model using ‘homework3’ package,
+generally two input needs to be prepared</p>
+<ul>
+<li><p><strong>formula</strong>: A formula of linear regression such as
+y ~ x1 + x2.</p></li>
+<li><p><strong>data</strong>: The dataset we want to analyses.</p></li>
+</ul>
+<p>Some other parameters are needed for <code>my_confint</code>:</p>
+<p>For <code>my_confint</code>, parameter <code>level</code> is
+needed:</p>
+<ul>
+<li>
+<strong>level</strong>: numerical value, the significance of the CI,
+default = 0.95.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="loading-packages">Loading packages<a class="anchor" aria-label="anchor" href="#loading-packages"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">homework3</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="set-some-data-example-and-the-result-of-statslm-in-r-and-my-linear-regression-">Set some data example and the result of <code>stats::lm</code> in
+<code>R</code> and <code>my linear regression</code>.<a class="anchor" aria-label="anchor" href="#set-some-data-example-and-the-result-of-statslm-in-r-and-my-linear-regression-"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
 <span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="va">mpg</span> <span class="op">~</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">hp</span></span>
 <span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span></span>
 <span><span class="va">s_m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
 <span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="some-examples-of-using-my_lm-function-and-my_confint-function-">Some examples of using <code>my_lm</code> function and
+<code>my_confint</code> function.<a class="anchor" aria-label="anchor" href="#some-examples-of-using-my_lm-function-and-my_confint-function-"></a>
+</h3>
+<p>*(1) Calculate the coefficients:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span></span>
+<span><span class="co">#&gt;      (Intercept)        disp          hp</span></span>
+<span><span class="co">#&gt; [1,]     30.7359 -0.03034628 -0.02484008</span></span></code></pre></div>
+<p>*(2) Calculate the residuals:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">residuals</span></span>
+<span><span class="co">#&gt;                           [,1]</span></span>
+<span><span class="co">#&gt; Mazda RX4           -2.1480911</span></span>
+<span><span class="co">#&gt; Mazda RX4 Wag       -2.1480911</span></span>
+<span><span class="co">#&gt; Datsun 710          -2.3483788</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive       1.2258440</span></span>
+<span><span class="co">#&gt; Hornet Sportabout    3.2357695</span></span>
+<span><span class="co">#&gt; Valiant             -3.1997835</span></span>
+<span><span class="co">#&gt; Duster 360           0.5745752</span></span>
+<span><span class="co">#&gt; Merc 240D           -0.3440204</span></span>
+<span><span class="co">#&gt; Merc 230            -1.3033408</span></span>
+<span><span class="co">#&gt; Merc 280            -3.3945383</span></span>
+<span><span class="co">#&gt; Merc 280C           -4.7945383</span></span>
+<span><span class="co">#&gt; Merc 450SE          -1.4951865</span></span>
+<span><span class="co">#&gt; Merc 450SL          -0.5951865</span></span>
+<span><span class="co">#&gt; Merc 450SLC         -2.6951865</span></span>
+<span><span class="co">#&gt; Cadillac Fleetwood  -0.9202450</span></span>
+<span><span class="co">#&gt; Lincoln Continental -1.0359995</span></span>
+<span><span class="co">#&gt; Chrysler Imperial    3.0296761</span></span>
+<span><span class="co">#&gt; Fiat 128             5.6917931</span></span>
+<span><span class="co">#&gt; Honda Civic          3.2529931</span></span>
+<span><span class="co">#&gt; Toyota Corolla       6.9363213</span></span>
+<span><span class="co">#&gt; Toyota Corona       -3.1818286</span></span>
+<span><span class="co">#&gt; Dodge Challenger    -1.8597761</span></span>
+<span><span class="co">#&gt; AMC Javelin         -2.5846240</span></span>
+<span><span class="co">#&gt; Camaro Z28          -0.7288875</span></span>
+<span><span class="co">#&gt; Pontiac Firebird     4.9496206</span></span>
+<span><span class="co">#&gt; Fiat X1-9            0.6008970</span></span>
+<span><span class="co">#&gt; Porsche 914-2        1.1752002</span></span>
+<span><span class="co">#&gt; Lotus Europa         5.3569558</span></span>
+<span><span class="co">#&gt; Ford Pantera L       2.2734203</span></span>
+<span><span class="co">#&gt; Ferrari Dino        -2.2886799</span></span>
+<span><span class="co">#&gt; Maserati Bora        1.7197522</span></span>
+<span><span class="co">#&gt; Volvo 142E          -2.9564359</span></span></code></pre></div>
+<p>*(3) Calculate the estimate value:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">fitted.values</span></span>
+<span><span class="co">#&gt;                         [,1]</span></span>
+<span><span class="co">#&gt; Mazda RX4           23.14809</span></span>
+<span><span class="co">#&gt; Mazda RX4 Wag       23.14809</span></span>
+<span><span class="co">#&gt; Datsun 710          25.14838</span></span>
+<span><span class="co">#&gt; Hornet 4 Drive      20.17416</span></span>
+<span><span class="co">#&gt; Hornet Sportabout   15.46423</span></span>
+<span><span class="co">#&gt; Valiant             21.29978</span></span>
+<span><span class="co">#&gt; Duster 360          13.72542</span></span>
+<span><span class="co">#&gt; Merc 240D           24.74402</span></span>
+<span><span class="co">#&gt; Merc 230            24.10334</span></span>
+<span><span class="co">#&gt; Merc 280            22.59454</span></span>
+<span><span class="co">#&gt; Merc 280C           22.59454</span></span>
+<span><span class="co">#&gt; Merc 450SE          17.89519</span></span>
+<span><span class="co">#&gt; Merc 450SL          17.89519</span></span>
+<span><span class="co">#&gt; Merc 450SLC         17.89519</span></span>
+<span><span class="co">#&gt; Cadillac Fleetwood  11.32025</span></span>
+<span><span class="co">#&gt; Lincoln Continental 11.43600</span></span>
+<span><span class="co">#&gt; Chrysler Imperial   11.67032</span></span>
+<span><span class="co">#&gt; Fiat 128            26.70821</span></span>
+<span><span class="co">#&gt; Honda Civic         27.14701</span></span>
+<span><span class="co">#&gt; Toyota Corolla      26.96368</span></span>
+<span><span class="co">#&gt; Toyota Corona       24.68183</span></span>
+<span><span class="co">#&gt; Dodge Challenger    17.35978</span></span>
+<span><span class="co">#&gt; AMC Javelin         17.78462</span></span>
+<span><span class="co">#&gt; Camaro Z28          14.02889</span></span>
+<span><span class="co">#&gt; Pontiac Firebird    14.25038</span></span>
+<span><span class="co">#&gt; Fiat X1-9           26.69910</span></span>
+<span><span class="co">#&gt; Porsche 914-2       24.82480</span></span>
+<span><span class="co">#&gt; Lotus Europa        25.04304</span></span>
+<span><span class="co">#&gt; Ford Pantera L      13.52658</span></span>
+<span><span class="co">#&gt; Ferrari Dino        21.98868</span></span>
+<span><span class="co">#&gt; Maserati Bora       13.28025</span></span>
+<span><span class="co">#&gt; Volvo 142E          24.35644</span></span></code></pre></div>
+<p>*(4) Calculate the sigma square:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">mse</span></span>
+<span><span class="co">#&gt; [1] 9.775636</span></span></code></pre></div>
+<p>*(5) Calculate the R squared:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">rsquared</span></span>
+<span><span class="co">#&gt; [1] 0.7482402</span></span></code></pre></div>
+<p>*(6) Calculate the Confidence Interval:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">CI</span> <span class="op">=</span> <span class="fu"><a href="../reference/my_confint.html">my_confint</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span>, <span class="fl">0.95</span><span class="op">)</span></span></code></pre></div>
+<p>*(7) Calculate the F statistic:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">F_stat</span>, <span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">df1</span>,</span>
+<span>  <span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">df2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Using other items are as same as above.</p>
+</div>
 <div class="section level2">
 <h2 id="correctness">Correctness<a class="anchor" aria-label="anchor" href="#correctness"></a>
 </h2>
-<p><strong>Compare the itr_per_sec between lm function in R and our
-my_lm function</strong></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">code_efficiency_comparison</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">mark</a></span><span class="op">(</span><span class="st">"homework3::my_lm()"</span> <span class="op">=</span> <span class="op">{</span></span>
+<p>(1)Test the coefficients.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">coefficients</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>(2)Test the residuals</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">residuals</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>(3)Test the fitted values</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">fitted.values</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">m1</span><span class="op">$</span><span class="va">fitted.values</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>(4)Test the MSE</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">mse</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">s_m1</span><span class="op">$</span><span class="va">sigma</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>(5)Test the R square and adj_R square</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">rsquared</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">s_m1</span><span class="op">$</span><span class="va">r.squared</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span><span class="op">$</span><span class="va">adj_rsquared</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">s_m1</span><span class="op">$</span><span class="va">adj.r.squared</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>(6)Test the CI</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/my_confint.html">my_confint</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>          <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>(7)Test the F statistic</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">ff</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">s_m1</span><span class="op">$</span><span class="va">fstatistic</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
+<p>Testing other items are as same as above.</p>
+<div class="section level3">
+<h3 id="efficiency">Efficiency<a class="anchor" aria-label="anchor" href="#efficiency"></a>
+</h3>
+<p>Compare the itr_per_sec between <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm</a></code> in
+<code>R</code> and my linear regression <code>my_lm</code> function by
+using <code>bench:mark()</code> function (coefficients):</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code_efficiency_comparison_lm</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">mark</a></span><span class="op">(</span><span class="st">"homework3::my_lm()"</span> <span class="op">=</span> <span class="op">{</span></span>
 <span>  <span class="va">beta_actual</span> <span class="op">&lt;-</span> <span class="va">m2</span><span class="op">$</span><span class="va">coefficients</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">beta_actual</span><span class="op">)</span></span>
 <span><span class="op">}</span>, <span class="st">"lm"</span> <span class="op">=</span> <span class="op">{</span></span>
 <span>  <span class="va">beta_expected</span> <span class="op">&lt;-</span> <span class="va">m1</span><span class="op">$</span><span class="va">coefficients</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">beta_expected</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">code_efficiency_comparison</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">code_efficiency_comparison_lm</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
 <span><span class="co">#&gt;   expression              min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;bch:expr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:byt&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_lm()    1.1µs   1.31µs   <span style="text-decoration: underline;">678</span>944.        0B      0  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lm                   1.45µs   1.65µs   <span style="text-decoration: underline;">574</span>757.        0B     57.5</span></span>
-<span><span class="va">itr_per_sec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">code_efficiency_comparison</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_lm()   1.13µs   1.31µs   <span style="text-decoration: underline;">725</span>275.        0B     72.5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lm                   1.44µs    1.6µs   <span style="text-decoration: underline;">598</span>524.        0B     59.9</span></span>
+<span><span class="va">itr_per_sec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">code_efficiency_comparison_lm</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">itr_per_sec_ratio</span> <span class="op">&lt;-</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
+<p>From the results of <code><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">bench::mark</a></code>, it can be seen that
+<code>my_lm</code> is about 1.2118 times as faster as
+<code>stats:lm</code>.</p>
+<p>Next, comparing the speed of constructing confidence interval
+<code>my_confint</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code_efficiency_comparison_CI</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">mark</a></span><span class="op">(</span><span class="st">"homework3::my_confint()"</span> <span class="op">=</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="va">CI_actual</span> <span class="op">&lt;-</span> <span class="va">CI</span><span class="op">)</span></span>
+<span><span class="op">}</span>, <span class="st">"confint"</span> <span class="op">=</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/unname.html" class="external-link">unname</a></span><span class="op">(</span><span class="va">CI_expected</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">code_efficiency_comparison_CI</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
+<span><span class="co">#&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;bch:expr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:byt&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_confint()   1.78µs   1.96µs   <span style="text-decoration: underline;">489</span>796.        0B    49.0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> confint                  156.6µs 163.71µs     <span style="text-decoration: underline;">5</span>780.    1.19KB     9.27</span></span>
+<span><span class="va">itr_per_sec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">code_efficiency_comparison_CI</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">itr_per_sec_ratio</span> <span class="op">&lt;-</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
+<p>From the results of <code><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">bench::mark</a></code>, it can be seen that
+<code>my_confint</code> is about 84.7408 times as faster as
+<code>stats:lm</code>.</p>
 </div>
-  </main>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
