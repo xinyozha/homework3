@@ -1,10 +1,15 @@
 Package: homework3
 Type: Package
-Title: lm_AIC
+Title: lm
 Version: 0.2.0
 Author: Xinyu
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: The function of linear regression and AIC.
+Maintainer: Xinyu Zhang <xinyozha@umich.edu>
+Description: The function of linear regressionThe goal of this R package is set
+    a Linear regression function (my_lm) to find some basic information such as
+    point estimate, fitted.values, residuals, mse, rsquared, adj_rsquared, 
+    standard error of beta, t.statistic, p.value, F.statistic, df1 and df2.
+    And the other function to fine the  upper and lower bounds of confidence 
+    interval.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -12,7 +17,8 @@ RoxygenNote: 7.2.3
 LinkingTo: 
     Rcpp
 Imports: 
-    Rcpp
+    Rcpp,
+    bench
 Suggests: 
     knitr,
     rmarkdown,

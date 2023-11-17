@@ -26,6 +26,7 @@ List containing the following elements
 \item F_stat
 \item df1
 \item df2
+\item CI
 }
 }
 \description{

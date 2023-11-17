@@ -10,7 +10,10 @@
 coverage](https://codecov.io/gh/xinyozha/homework3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/xinyozha/homework3?branch=main)
 <!-- badges: end -->
 
-The goal of Linear regression is to …
+The goal of this R package is set a Linear regression function (my_lm)
+to find some basic information such as point estimate, fitted.values,
+residuals, mse, rsquared, adj_rsquared, standard error of beta,
+t.statistic, p.value, F.statistic, df1 and df2.
 
 ## Installation
 
@@ -25,12 +28,13 @@ devtools::install_github("xinyozha/homework3")
 ## Loading packages
 
 ``` r
-#library(homework3)
+library(homework3)
 ```
 
 Use the following code to find more details about the “homework3”
 package (Linear regression):
 
 ``` r
-#browseVignettes("my-vignette")
+browseVignettes("homework3")
+#> No vignettes found by browseVignettes("homework3")
 ```

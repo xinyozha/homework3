@@ -14,6 +14,37 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+
+```{r}
 library(homework3)
+library(bench)
+
+data <- mtcars
+formula <- mpg ~ disp + hp
+m1 <- lm(formula, data)
+s_m1 <- summary(m1)
+m2 <- my_lm(formula, data)
 ```
+## Correctness
+**Compare the itr_per_sec between lm function in R and our my_lm function**
+```{r}
+code_efficiency_comparison <- bench::mark("homework3::my_lm()" = {
+  beta_actual <- m2$coefficients
+  as.vector(beta_actual)
+}, "lm" = {
+  beta_expected <- m1$coefficients
+  as.vector(beta_expected)
+})
+summary(code_efficiency_comparison)
+itr_per_sec <- as.numeric(code_efficiency_comparison[[4]])
+itr_per_sec_ratio <- itr_per_sec[1] / itr_per_sec[2]
+```
+
+
+```{r}
+```
+
+
+
+
+
