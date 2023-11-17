@@ -74,7 +74,36 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">homework3</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">homework3</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://bench.r-lib.org/" class="external-link">bench</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">mtcars</span></span>
+<span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="va">mpg</span> <span class="op">~</span> <span class="va">disp</span> <span class="op">+</span> <span class="va">hp</span></span>
+<span><span class="va">m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span></span>
+<span><span class="va">s_m1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">m1</span><span class="op">)</span></span>
+<span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/my_lm.html">my_lm</a></span><span class="op">(</span><span class="va">formula</span>, <span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="correctness">Correctness<a class="anchor" aria-label="anchor" href="#correctness"></a>
+</h2>
+<p><strong>Compare the itr_per_sec between lm function in R and our
+my_lm function</strong></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">code_efficiency_comparison</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">mark</a></span><span class="op">(</span><span class="st">"homework3::my_lm()"</span> <span class="op">=</span> <span class="op">{</span></span>
+<span>  <span class="va">beta_actual</span> <span class="op">&lt;-</span> <span class="va">m2</span><span class="op">$</span><span class="va">coefficients</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">beta_actual</span><span class="op">)</span></span>
+<span><span class="op">}</span>, <span class="st">"lm"</span> <span class="op">=</span> <span class="op">{</span></span>
+<span>  <span class="va">beta_expected</span> <span class="op">&lt;-</span> <span class="va">m1</span><span class="op">$</span><span class="va">coefficients</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">beta_expected</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">code_efficiency_comparison</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
+<span><span class="co">#&gt;   expression              min   median `itr/sec` mem_alloc `gc/sec`</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;bch:expr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:byt&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_lm()   1.12µs   1.31µs   <span style="text-decoration: underline;">715</span>487.        0B      0  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lm                   1.45µs   1.63µs   <span style="text-decoration: underline;">586</span>260.        0B     58.6</span></span>
+<span><span class="va">itr_per_sec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">code_efficiency_comparison</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">itr_per_sec_ratio</span> <span class="op">&lt;-</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
+</div>
   </main>
 </div>
 
@@ -82,7 +111,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by The package maintainer.</p>
+<p>Developed by Xinyu Zhang.</p>
 </div>
 
 <div class="pkgdown-footer-right">
