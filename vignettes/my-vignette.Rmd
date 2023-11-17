@@ -15,35 +15,148 @@ knitr::opts_chunk$set(
 ```
 
 
+```{r setup}
+library(bench)
+```
+
+
+
+### Basic command
+
+To fit the linear regression model using 'homework3' package, generally two input needs to be prepared 
+
+* **formula**: A formula of linear regression such as y ~ x1 + x2.
+
+* **data**: The dataset we want to analyses.
+
+Some other parameters are needed for `my_confint`:
+
+For `my_confint`, parameter `level` is needed:
+
+* **level**: numerical value, the significance of the CI, default = 0.95.
+
+### Loading packages
+
 ```{r}
 library(homework3)
-library(bench)
+```
 
+### Set some data example and the result of `stats::lm` in `R` and `my linear regression`.
+
+```{r}
 data <- mtcars
 formula <- mpg ~ disp + hp
 m1 <- lm(formula, data)
 s_m1 <- summary(m1)
 m2 <- my_lm(formula, data)
 ```
-## Correctness
-**Compare the itr_per_sec between lm function in R and our my_lm function**
+
+### Some examples of using `my_lm` function and `my_confint` function.
+*(1) Calculate the coefficients: 
 ```{r}
-code_efficiency_comparison <- bench::mark("homework3::my_lm()" = {
+my_lm(formula, data)$coefficients
+```
+*(2) Calculate the residuals: 
+```{r}
+my_lm(formula, data)$residuals
+```
+
+*(3) Calculate the estimate value: 
+```{r}
+my_lm(formula, data)$fitted.values
+```
+*(4) Calculate the sigma square: 
+```{r}
+my_lm(formula, data)$mse
+```
+
+*(5) Calculate the R squared: 
+```{r}
+my_lm(formula, data)$rsquared
+```
+*(6) Calculate the Confidence Interval:
+```{r}
+CI = my_confint(formula, data, 0.95)
+```
+
+*(7) Calculate the F statistic:
+```{r}
+ff <- c(
+  my_lm(formula, data)$F_stat, my_lm(formula, data)$df1,
+  my_lm(formula, data)$df2
+)
+```
+
+Using other items are as same as above.
+
+## Correctness
+(1)Test the coefficients.
+```{r}
+all.equal(as.numeric(my_lm(formula, data)$coefficients), 
+          as.numeric(m1$coefficients))
+```
+(2)Test the residuals
+```{r}
+all.equal(as.numeric(my_lm(formula, data)$residuals), 
+          as.numeric(m1$residuals))
+```
+(3)Test the fitted values
+```{r}
+all.equal(as.numeric(my_lm(formula, data)$fitted.values), 
+          as.numeric(m1$fitted.values))
+```
+(4)Test the MSE
+```{r}
+all.equal(as.numeric(my_lm(formula, data)$mse), 
+          as.numeric(s_m1$sigma^2))
+```
+(5)Test the R square and adj_R square
+```{r}
+all.equal(as.numeric(my_lm(formula, data)$rsquared), 
+          as.numeric(s_m1$r.squared))
+all.equal(as.numeric(my_lm(formula, data)$adj_rsquared), 
+          as.numeric(s_m1$adj.r.squared))
+```
+(6)Test the CI
+```{r}
+all.equal(as.numeric(my_confint(formula, data, 0.95)), 
+          as.numeric(confint(m1)))
+```
+(7)Test the F statistic
+```{r}
+all.equal(ff, as.numeric(s_m1$fstatistic))
+```
+Testing other items are as same as above.
+
+### Efficiency
+Compare the itr_per_sec between `stats::lm` in `R` and my linear regression `my_lm` function by using `bench:mark()` function (coefficients):
+```{r}
+code_efficiency_comparison_lm <- bench::mark("homework3::my_lm()" = {
   beta_actual <- m2$coefficients
   as.vector(beta_actual)
 }, "lm" = {
   beta_expected <- m1$coefficients
   as.vector(beta_expected)
 })
-summary(code_efficiency_comparison)
-itr_per_sec <- as.numeric(code_efficiency_comparison[[4]])
+summary(code_efficiency_comparison_lm)
+itr_per_sec <- as.numeric(code_efficiency_comparison_lm[[4]])
 itr_per_sec_ratio <- itr_per_sec[1] / itr_per_sec[2]
 ```
+From the results of `bench::mark`, it can be seen that `my_lm` is about `r round(itr_per_sec_ratio, digits = 4)` times as faster as `stats:lm`.
 
+Next, comparing the speed of constructing confidence interval `my_confint`:
 
 ```{r}
+code_efficiency_comparison_CI <- bench::mark("homework3::my_confint()" = {
+  unname(CI_actual <- CI)
+}, "confint" = {
+  unname(CI_expected <- confint(m1))
+})
+summary(code_efficiency_comparison_CI)
+itr_per_sec <- as.numeric(code_efficiency_comparison_CI[[4]])
+itr_per_sec_ratio <- itr_per_sec[1] / itr_per_sec[2]
 ```
-
+From the results of `bench::mark`, it can be seen that `my_confint` is about `r round(itr_per_sec_ratio, digits = 4)` times as faster as `stats:lm`.
 
 
 

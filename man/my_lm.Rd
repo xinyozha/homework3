@@ -33,7 +33,7 @@ List containing the following elements
 Multiply Linear Regression
 }
 \examples{
-data = mtcars
-formula = mpg ~ disp + hp
+data <- mtcars
+formula <- mpg ~ disp + hp
 my_lm(formula, data)
 }

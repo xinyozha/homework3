@@ -20,7 +20,7 @@ The upper and lower bounds of confidence interval: CI_matrix
 Confidence Interval
 }
 \examples{
-data = mtcars
-formula = mpg ~ disp + hp
+data <- mtcars
+formula <- mpg ~ disp + hp
 my_confint(formula, data, level = 0.95)
 }

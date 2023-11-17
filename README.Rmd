@@ -24,7 +24,7 @@ The goal of this R package is set a Linear regression function (my_lm) to find s
 
 ## Installation
 
-You can install the development version of homework3 (Linear regression) from [GitHub](https://github.com/) with:
+You can install the development version of  `homework3` (Linear regression) from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -37,10 +37,17 @@ devtools::install_github("xinyozha/homework3")
 library(homework3)
 ```
 
-Use the following code to find more details about the "homework3" package (Linear regression):
+You can find more details tutorial about the "homework3" package (Linear regression) in Vignettes folder or use the following code:
 
 ```{r}
 browseVignettes("homework3")
+```
+
+## Help
+You can use the following code to view the help page of My Linear regression function:
+```{r}
+?my_lm
+?my_confint
 ```
 
 

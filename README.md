@@ -17,8 +17,8 @@ t.statistic, p.value, F.statistic, df1 and df2.
 
 ## Installation
 
-You can install the development version of homework3 (Linear regression)
-from [GitHub](https://github.com/) with:
+You can install the development version of \* `homework3` (Linear
+regression) from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -35,6 +35,5 @@ Use the following code to find more details about the “homework3”
 package (Linear regression):
 
 ``` r
-browseVignettes("homework3")
-#> No vignettes found by browseVignettes("homework3")
+# browseVignettes("homework3")
 ```
