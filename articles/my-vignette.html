@@ -270,12 +270,12 @@ using <code>bench:mark()</code> function (coefficients):</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
 <span><span class="co">#&gt;   expression              min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;bch:expr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:byt&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_lm()   1.13µs   1.33µs   <span style="text-decoration: underline;">713</span>684.        0B     71.4</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lm                   1.45µs   1.65µs   <span style="text-decoration: underline;">577</span>877.        0B     57.8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_lm()   1.15µs   1.31µs   <span style="text-decoration: underline;">715</span>802.        0B     71.6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> lm                   1.48µs   1.67µs   <span style="text-decoration: underline;">567</span>669.        0B     56.8</span></span>
 <span><span class="va">itr_per_sec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">code_efficiency_comparison_lm</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">itr_per_sec_ratio</span> <span class="op">&lt;-</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <p>From the results of <code><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">bench::mark</a></code>, it can be seen that
-<code>my_lm</code> is about 1.235 times as faster as
+<code>my_lm</code> is about 1.261 times as faster as
 <code>stats:lm</code>.</p>
 <p>Next, comparing the speed of constructing confidence interval
 <code>my_confint</code>:</p>
@@ -289,12 +289,12 @@ using <code>bench:mark()</code> function (coefficients):</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 6</span></span></span>
 <span><span class="co">#&gt;   expression                   min   median `itr/sec` mem_alloc `gc/sec`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;bch:expr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:tm&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bch:byt&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_confint()   1.75µs   2.02µs   <span style="text-decoration: underline;">469</span>591.        0B    47.0 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> confint                 156.56µs 164.34µs     <span style="text-decoration: underline;">5</span>749.    1.19KB     9.37</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> homework3::my_confint()   1.79µs   2.01µs   <span style="text-decoration: underline;">473</span>171.        0B    47.3 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> confint                 157.21µs 164.27µs     <span style="text-decoration: underline;">5</span>699.    1.19KB     9.41</span></span>
 <span><span class="va">itr_per_sec</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">code_efficiency_comparison_CI</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">itr_per_sec_ratio</span> <span class="op">&lt;-</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">itr_per_sec</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <p>From the results of <code><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">bench::mark</a></code>, it can be seen that
-<code>my_confint</code> is about 81.6852 times as faster as
+<code>my_confint</code> is about 83.0199 times as faster as
 <code>stats:lm</code>.</p>
 </div>
 </div>
