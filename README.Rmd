@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/xinyozha/homework3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/xinyozha/homework3?branch=main)
 <!-- badges: end -->
 
-The goal of this R package is set a Linear regression function (my_lm) to find some basic information such as point estimate, fitted.values, residuals, mse, rsquared, adj_rsquared, standard error of beta, t.statistic, p.value, F.statistic, df1 and df2. 
+The goal of this R package is set a Linear regression function (my_lm) to find some basic information such as point estimate, fitted.values, residuals, mse, rsquared, adj_rsquared, standard error of beta, t.statistic, p.value, F.statistic, df1 and df2. Additionally, set a function (my_confint) to get the CI.
 
 ## Installation
 
